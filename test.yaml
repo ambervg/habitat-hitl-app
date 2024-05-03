@@ -1,0 +1,39 @@
+defaults:
+  - social_rearrange: pop_play
+  - hitl_defaults
+  - _self_
+
+habitat:
+  # https://github.com/facebookresearch/habitat-lab/blob/main/habitat-lab/habitat/config/default_structured_configs.py
+  environment:
+    iterator_options:
+      # for manual inspection of episodes by a user, it makes sense to disable shuffle
+      shuffle: False
+  task:
+    measurements:
+      rearrange_cooperate_reward:
+        end_on_collide: False
+      pddl_success:
+        must_call_stop: False
+
+habitat_baselines:
+  # todo: document these choices
+  eval:
+    should_load_ckpt: False
+  rl:
+    agent:
+      num_pool_agents_per_type: [2,1]
+
+habitat_hitl:
+  window:
+    title: "Test"
+    width: 1300
+    height: 1000
+  gui_controlled_agent:
+    agent_index: 1
+    ang_speed: 15
+  # debug_third_person_viewport:
+  #   width: 256
+  # debug_images: ["agent_1_head_depth"]
+
+pick_throw_vr:
