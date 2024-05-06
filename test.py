@@ -494,7 +494,7 @@ class AppStateTest(AppState):
                 vel = rom_obj.linear_velocity
                 vel.y = 0
                 rom_obj.linear_velocity = vel
-            print(f"Taget obj: {self._target_obj_ids[i]}; pos: {rom_obj.translation}; vel: {rom_obj.linear_velocity}")
+            # print(f"Target obj: {self._target_obj_ids[i]}; pos: {rom_obj.translation}; vel: {rom_obj.linear_velocity}")
 
     def _get_target_object_position(self, target_obj_idx):
         return self._get_target_rigid_object(target_obj_idx).translation
@@ -682,6 +682,8 @@ class AppStateTest(AppState):
                 primary_obs_type="color",  # Options: “color”, “depth”, “semantic”
                 video_file=os.path.join(os.getcwd(), 'habitat_experimenting', 'testdata', f'testdata-{datetime.now().strftime("%Y-%m-%d_ %Hh%Mm")}.mp4'),
             )
+            # Check available sensor info
+            print(sim.get_sensor_observations().keys())
             # Close the app
             self._app_service.end_episode()
             post_sim_update_dict["application_exit"] = True
@@ -771,7 +773,6 @@ class AppStateTest(AppState):
         # print(f"Held_target_obj_idx: {self._held_target_obj_idx}")
         # print(f"Target_objects: {self._target_obj_ids}")  # [245, 246, 247, 248, 249, 250, 251, 252]
         
-
     def cast_ray(self, ray):
         if not ray:
             return None
@@ -810,6 +811,7 @@ class AppStateTest(AppState):
 )
 
 def main(config):
+    print(config)
     hitl_main(
         config,
         lambda app_service: AppStateTest(app_service),
